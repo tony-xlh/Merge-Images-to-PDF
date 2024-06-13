@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.dynamsoft.cvr.CaptureVisionRouterException;
 import com.dynamsoft.cvr.CapturedResult;
 import com.dynamsoft.cvr.EnumPresetTemplate;
 import com.dynamsoft.cvr.SimplifiedCaptureVisionSettings;
+import com.dynamsoft.ddn.EnumImageColourMode;
 import com.dynamsoft.ddn.NormalizedImageResultItem;
 import com.dynamsoft.ddn.NormalizedImagesResult;
 import com.dynamsoft.license.LicenseManager;
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private CaptureVisionRouter mRouter;
     private Context mContext;
     private TextView textView;
+    private RadioButton blackAndWhiteRadioButton;
+    private RadioButton grayRadioButton;
+    private RadioButton colorRadioButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,30 @@ public class MainActivity extends AppCompatActivity {
         });
         mRouter = new CaptureVisionRouter(MainActivity.this);
         Button selectImagesButton = findViewById(R.id.selectImagesButton);
+        blackAndWhiteRadioButton = findViewById(R.id.blackAndWhiteRadioButton);
+        grayRadioButton = findViewById(R.id.grayRadioButton);
+        colorRadioButton = findViewById(R.id.colorRadioButton);
+        blackAndWhiteRadioButton.setOnClickListener((view)->{
+            try {
+                updateColorMode(EnumImageColourMode.ICM_BINARY);
+            } catch (CaptureVisionRouterException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        grayRadioButton.setOnClickListener((view)->{
+            try {
+                updateColorMode(EnumImageColourMode.ICM_GRAYSCALE);
+            } catch (CaptureVisionRouterException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        colorRadioButton.setOnClickListener((view)->{
+            try {
+                updateColorMode(EnumImageColourMode.ICM_COLOUR);
+            } catch (CaptureVisionRouterException e) {
+                throw new RuntimeException(e);
+            }
+        });
         textView = findViewById(R.id.textView);
         selectImagesButton.setOnClickListener((view)->{
             galleryActivityLauncher.launch(new String[]{"image/*"});
@@ -82,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void updateColorMode(int mode) throws CaptureVisionRouterException {
+        SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+        settings.documentSettings.colourMode = mode;
+        Log.d(TAG,"color mode:"+settings.documentSettings.colourMode);
+        mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
+    }
+
     private void mergeImagesToPDF(List<Uri> results) throws Exception {
         ImageManager imageManager = new ImageManager();
         File externalFilesDir = this.getApplicationContext().getExternalFilesDir("");
@@ -90,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
         SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
         settings.roiMeasuredInPercentage = true;
         settings.roi = new Quadrilateral(new Point(0,0),new Point(100,0),new Point(100,100),new Point(0,100));
+
         mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
+
         for (Uri result:results) {
             Log.d(TAG,result.getPath());
             InputStream inp = this.getApplicationContext().getContentResolver().openInputStream(result);
