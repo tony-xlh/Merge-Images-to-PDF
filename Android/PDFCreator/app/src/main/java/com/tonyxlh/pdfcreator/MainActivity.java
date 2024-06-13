@@ -6,14 +6,30 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Point;
+import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.CaptureResult;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import com.dynamsoft.core.basic_structures.ImageData;
+import com.dynamsoft.core.basic_structures.Quadrilateral;
 import com.dynamsoft.cvr.CaptureVisionRouter;
+import com.dynamsoft.cvr.CaptureVisionRouterException;
+import com.dynamsoft.cvr.CapturedResult;
+import com.dynamsoft.cvr.EnumPresetTemplate;
+import com.dynamsoft.cvr.SimplifiedCaptureVisionSettings;
+import com.dynamsoft.ddn.NormalizedImageResultItem;
+import com.dynamsoft.ddn.NormalizedImagesResult;
 import com.dynamsoft.license.LicenseManager;
+import com.dynamsoft.utility.ImageManager;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,10 +57,47 @@ public class MainActivity extends AppCompatActivity {
                 if (results != null) {
                     // perform desired operations using the result Uri
                     Log.d(TAG,"selected "+results.size()+" files");
+                    try {
+                        mergeImagesToPDF(results);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     Log.d(TAG, "onActivityResult: the result is null for some reason");
                 }
             }
         });
+    }
+
+    private void mergeImagesToPDF(List<Uri> results) throws Exception {
+        ImageManager imageManager = new ImageManager();
+        File externalFilesDir = this.getApplicationContext().getExternalFilesDir("");
+        String filename = new Date().getTime()+".pdf";
+        File outputFile = new File(externalFilesDir,filename);
+        SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+        settings.roiMeasuredInPercentage = true;
+        settings.roi = new Quadrilateral(new Point(0,0),new Point(100,0),new Point(100,100),new Point(0,100));
+        mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
+        for (Uri result:results) {
+            Log.d(TAG,result.getPath());
+            InputStream inp = this.getApplicationContext().getContentResolver().openInputStream(result);
+            if (inp != null) {
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = inp.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                CapturedResult capturedResult = mRouter.capture(buffer.toByteArray(), EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+                NormalizedImagesResult normalizedImagesResult = capturedResult.getNormalizedImagesResult();
+                if (normalizedImagesResult != null) {
+                    NormalizedImageResultItem[] items = normalizedImagesResult.getItems();
+                    if (items != null && items.length>0) {
+                        ImageData imageData = items[0].getImageData();
+                        imageManager.saveToFile(imageData,outputFile.getPath(),true);
+                    }
+                }
+            }
+        }
     }
 }
