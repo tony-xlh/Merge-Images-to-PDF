@@ -16,6 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/enableAutoCroppingCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Auto Cropping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectImagesButton" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -25,7 +33,7 @@
         android:layout_marginEnd="148dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectImagesButton">
+        app:layout_constraintTop_toBottomOf="@+id/enableAutoCroppingCheckBox">
 
         <RadioButton
             android:id="@+id/blackAndWhiteRadioButton"

@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,15 +43,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String LICENSE = "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9";
     private ActivityResultLauncher<String[]> galleryActivityLauncher;
     private CaptureVisionRouter mRouter;
-    private Context mContext;
     private TextView textView;
-    private RadioButton blackAndWhiteRadioButton;
-    private RadioButton grayRadioButton;
-    private RadioButton colorRadioButton;
+    private String templateName = EnumPresetTemplate.PT_NORMALIZE_DOCUMENT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         setContentView(R.layout.activity_main);
         LicenseManager.initLicense(LICENSE, this, (isSuccess, error) -> {
             if (!isSuccess) {
@@ -59,9 +56,27 @@ public class MainActivity extends AppCompatActivity {
         });
         mRouter = new CaptureVisionRouter(MainActivity.this);
         Button selectImagesButton = findViewById(R.id.selectImagesButton);
-        blackAndWhiteRadioButton = findViewById(R.id.blackAndWhiteRadioButton);
-        grayRadioButton = findViewById(R.id.grayRadioButton);
-        colorRadioButton = findViewById(R.id.colorRadioButton);
+        RadioButton blackAndWhiteRadioButton = findViewById(R.id.blackAndWhiteRadioButton);
+        RadioButton grayRadioButton = findViewById(R.id.grayRadioButton);
+        RadioButton colorRadioButton = findViewById(R.id.colorRadioButton);
+        CheckBox enableAutoCroppingCheckBox = findViewById(R.id.enableAutoCroppingCheckBox);
+        enableAutoCroppingCheckBox.setOnCheckedChangeListener((view,checked)->{
+            try {
+                if (checked) {
+                    templateName = EnumPresetTemplate.PT_DETECT_AND_NORMALIZE_DOCUMENT;
+                }else{
+                    templateName = EnumPresetTemplate.PT_NORMALIZE_DOCUMENT;
+                    SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+                    settings.roiMeasuredInPercentage = true;
+                    settings.roi = new Quadrilateral(new Point(0,0),new Point(100,0),new Point(100,100),new Point(0,100));
+                    mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
+                }
+                updateColorMode(EnumImageColourMode.ICM_BINARY);
+                blackAndWhiteRadioButton.setChecked(true);
+            } catch (CaptureVisionRouterException e) {
+                throw new RuntimeException(e);
+            }
+        });
         blackAndWhiteRadioButton.setOnClickListener((view)->{
             try {
                 updateColorMode(EnumImageColourMode.ICM_BINARY);
@@ -112,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateColorMode(int mode) throws CaptureVisionRouterException {
-        SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+        SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(templateName);
         settings.documentSettings.colourMode = mode;
         Log.d(TAG,"color mode:"+settings.documentSettings.colourMode);
-        mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
+        mRouter.updateSettings(templateName,settings);
     }
 
     private void mergeImagesToPDF(List<Uri> results) throws Exception {
@@ -123,12 +138,6 @@ public class MainActivity extends AppCompatActivity {
         File externalFilesDir = this.getApplicationContext().getExternalFilesDir("");
         String filename = new Date().getTime()+".pdf";
         File outputFile = new File(externalFilesDir,filename);
-        SimplifiedCaptureVisionSettings settings = mRouter.getSimplifiedSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
-        settings.roiMeasuredInPercentage = true;
-        settings.roi = new Quadrilateral(new Point(0,0),new Point(100,0),new Point(100,100),new Point(0,100));
-
-        mRouter.updateSettings(EnumPresetTemplate.PT_NORMALIZE_DOCUMENT,settings);
-
         for (Uri result:results) {
             Log.d(TAG,result.getPath());
             InputStream inp = this.getApplicationContext().getContentResolver().openInputStream(result);
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 while ((nRead = inp.read(data, 0, data.length)) != -1) {
                     buffer.write(data, 0, nRead);
                 }
-                CapturedResult capturedResult = mRouter.capture(buffer.toByteArray(), EnumPresetTemplate.PT_NORMALIZE_DOCUMENT);
+                CapturedResult capturedResult = mRouter.capture(buffer.toByteArray(), templateName);
                 NormalizedImagesResult normalizedImagesResult = capturedResult.getNormalizedImagesResult();
                 if (normalizedImagesResult != null) {
                     NormalizedImageResultItem[] items = normalizedImagesResult.getItems();
