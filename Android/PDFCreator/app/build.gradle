@@ -29,7 +29,12 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.dynamsoft:dynamsoftcapturevisionrouter:2.2.30'
+    implementation 'com.dynamsoft:dynamsoftcore:3.2.30'
+    implementation 'com.dynamsoft:dynamsoftdocumentnormalizer:2.2.11'
+    implementation 'com.dynamsoft:dynamsoftimageprocessing:2.2.30'
+    implementation 'com.dynamsoft:dynamsoftlicense:3.2.20'
+    implementation 'com.dynamsoft:dynamsoftutility:1.2.20'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
