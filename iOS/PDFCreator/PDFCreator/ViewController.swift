@@ -13,6 +13,7 @@ import DynamsoftDocumentNormalizer
 import DynamsoftUtility
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, PHPickerViewControllerDelegate {
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var selectImagesUIButton: UIButton!
     @IBOutlet weak var colorModeUIPickerView: UIPickerView!
     @IBOutlet weak var enableAutoCroppingUISwitch: UISwitch!
@@ -48,6 +49,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         var enableAutoCropping = false
         var selectedColorModeIndex = 0
         DispatchQueue.main.sync {
+            statusLabel.text = "Processing..."
+            
             if enableAutoCroppingUISwitch.isOn {
                 enableAutoCropping = true
             }
@@ -92,6 +95,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
         }
         DispatchQueue.main.async {
+            self.statusLabel.text = ""
             let objectsToShare = [url]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
 
