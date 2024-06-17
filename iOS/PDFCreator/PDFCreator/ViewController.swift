@@ -9,6 +9,7 @@ import UIKit
 import PhotosUI
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, PHPickerViewControllerDelegate {
+    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         for item in results {
             print(item.itemProvider)

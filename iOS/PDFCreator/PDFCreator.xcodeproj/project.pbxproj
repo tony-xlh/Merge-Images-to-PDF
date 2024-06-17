@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F18F31B3CE1A3375E8FB6D7 /* Pods_PDFCreator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4280F8C0967F4A996DF3DAFA /* Pods_PDFCreator.framework */; };
+		1382ED8123918195500B5A5E /* Pods_PDFCreatorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF4277DE8CF1D5E13479A40 /* Pods_PDFCreatorTests.framework */; };
+		AB653D96A2293D8E80D8B804 /* Pods_PDFCreator_PDFCreatorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C40909818D1F69341C8C243 /* Pods_PDFCreator_PDFCreatorUITests.framework */; };
 		BE5288832C1C3B360056F376 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5288822C1C3B360056F376 /* AppDelegate.swift */; };
 		BE5288852C1C3B360056F376 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5288842C1C3B360056F376 /* SceneDelegate.swift */; };
 		BE5288872C1C3B360056F376 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5288862C1C3B360056F376 /* ViewController.swift */; };
@@ -36,6 +39,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1037F9AB1A9C99B0F269AA93 /* Pods-PDFCreatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreatorTests.debug.xcconfig"; path = "Target Support Files/Pods-PDFCreatorTests/Pods-PDFCreatorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4280F8C0967F4A996DF3DAFA /* Pods_PDFCreator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PDFCreator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A38FE068227C9ECFB62AF90 /* Pods-PDFCreator-PDFCreatorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreator-PDFCreatorUITests.debug.xcconfig"; path = "Target Support Files/Pods-PDFCreator-PDFCreatorUITests/Pods-PDFCreator-PDFCreatorUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6C40909818D1F69341C8C243 /* Pods_PDFCreator_PDFCreatorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PDFCreator_PDFCreatorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C74C591F58ADB1C8C4A6D4A /* Pods-PDFCreator-PDFCreatorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreator-PDFCreatorUITests.release.xcconfig"; path = "Target Support Files/Pods-PDFCreator-PDFCreatorUITests/Pods-PDFCreator-PDFCreatorUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7AF4277DE8CF1D5E13479A40 /* Pods_PDFCreatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PDFCreatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE52887F2C1C3B360056F376 /* PDFCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5288822C1C3B360056F376 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE5288842C1C3B360056F376 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +58,9 @@
 		BE52889F2C1C3B370056F376 /* PDFCreatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDFCreatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5288A32C1C3B370056F376 /* PDFCreatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreatorUITests.swift; sourceTree = "<group>"; };
 		BE5288A52C1C3B370056F376 /* PDFCreatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E5063CA65040DD7BD993221E /* Pods-PDFCreator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreator.release.xcconfig"; path = "Target Support Files/Pods-PDFCreator/Pods-PDFCreator.release.xcconfig"; sourceTree = "<group>"; };
+		E5EC2411E6E80292898726EE /* Pods-PDFCreatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreatorTests.release.xcconfig"; path = "Target Support Files/Pods-PDFCreatorTests/Pods-PDFCreatorTests.release.xcconfig"; sourceTree = "<group>"; };
+		EDDB779AC1D4E70649CB54C5 /* Pods-PDFCreator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDFCreator.debug.xcconfig"; path = "Target Support Files/Pods-PDFCreator/Pods-PDFCreator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F18F31B3CE1A3375E8FB6D7 /* Pods_PDFCreator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1382ED8123918195500B5A5E /* Pods_PDFCreatorTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +84,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB653D96A2293D8E80D8B804 /* Pods_PDFCreator_PDFCreatorUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		539F3B69E19C66BA0AA739FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDDB779AC1D4E70649CB54C5 /* Pods-PDFCreator.debug.xcconfig */,
+				E5063CA65040DD7BD993221E /* Pods-PDFCreator.release.xcconfig */,
+				4A38FE068227C9ECFB62AF90 /* Pods-PDFCreator-PDFCreatorUITests.debug.xcconfig */,
+				6C74C591F58ADB1C8C4A6D4A /* Pods-PDFCreator-PDFCreatorUITests.release.xcconfig */,
+				1037F9AB1A9C99B0F269AA93 /* Pods-PDFCreatorTests.debug.xcconfig */,
+				E5EC2411E6E80292898726EE /* Pods-PDFCreatorTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		54498BBEDA0C125141FE0213 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4280F8C0967F4A996DF3DAFA /* Pods_PDFCreator.framework */,
+				6C40909818D1F69341C8C243 /* Pods_PDFCreator_PDFCreatorUITests.framework */,
+				7AF4277DE8CF1D5E13479A40 /* Pods_PDFCreatorTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE5288762C1C3B360056F376 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +122,8 @@
 				BE5288982C1C3B370056F376 /* PDFCreatorTests */,
 				BE5288A22C1C3B370056F376 /* PDFCreatorUITests */,
 				BE5288802C1C3B360056F376 /* Products */,
+				539F3B69E19C66BA0AA739FE /* Pods */,
+				54498BBEDA0C125141FE0213 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,9 +175,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE5288A92C1C3B370056F376 /* Build configuration list for PBXNativeTarget "PDFCreator" */;
 			buildPhases = (
+				E2D01EEC111008A8F35B542A /* [CP] Check Pods Manifest.lock */,
 				BE52887B2C1C3B360056F376 /* Sources */,
 				BE52887C2C1C3B360056F376 /* Frameworks */,
 				BE52887D2C1C3B360056F376 /* Resources */,
+				8BE9A1D00181CDD4F38C2A33 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +194,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE5288AC2C1C3B370056F376 /* Build configuration list for PBXNativeTarget "PDFCreatorTests" */;
 			buildPhases = (
+				4AE48640FCC89B36571F6A8A /* [CP] Check Pods Manifest.lock */,
 				BE5288912C1C3B370056F376 /* Sources */,
 				BE5288922C1C3B370056F376 /* Frameworks */,
 				BE5288932C1C3B370056F376 /* Resources */,
@@ -169,9 +213,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE5288AF2C1C3B370056F376 /* Build configuration list for PBXNativeTarget "PDFCreatorUITests" */;
 			buildPhases = (
+				047B28DE1EC36B0FD48F5622 /* [CP] Check Pods Manifest.lock */,
 				BE52889B2C1C3B370056F376 /* Sources */,
 				BE52889C2C1C3B370056F376 /* Frameworks */,
 				BE52889D2C1C3B370056F376 /* Resources */,
+				E2567789F60A70E646E83199 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +298,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		047B28DE1EC36B0FD48F5622 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDFCreator-PDFCreatorUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4AE48640FCC89B36571F6A8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDFCreatorTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BE9A1D00181CDD4F38C2A33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PDFCreator/Pods-PDFCreator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PDFCreator/Pods-PDFCreator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PDFCreator/Pods-PDFCreator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2567789F60A70E646E83199 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PDFCreator-PDFCreatorUITests/Pods-PDFCreator-PDFCreatorUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PDFCreator-PDFCreatorUITests/Pods-PDFCreator-PDFCreatorUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PDFCreator-PDFCreatorUITests/Pods-PDFCreator-PDFCreatorUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2D01EEC111008A8F35B542A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDFCreator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE52887B2C1C3B360056F376 /* Sources */ = {
@@ -437,6 +586,7 @@
 		};
 		BE5288AA2C1C3B370056F376 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDDB779AC1D4E70649CB54C5 /* Pods-PDFCreator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -466,6 +616,7 @@
 		};
 		BE5288AB2C1C3B370056F376 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5063CA65040DD7BD993221E /* Pods-PDFCreator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -495,6 +646,7 @@
 		};
 		BE5288AD2C1C3B370056F376 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1037F9AB1A9C99B0F269AA93 /* Pods-PDFCreatorTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +667,7 @@
 		};
 		BE5288AE2C1C3B370056F376 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5EC2411E6E80292898726EE /* Pods-PDFCreatorTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -535,6 +688,7 @@
 		};
 		BE5288B02C1C3B370056F376 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A38FE068227C9ECFB62AF90 /* Pods-PDFCreator-PDFCreatorUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -553,6 +707,7 @@
 		};
 		BE5288B12C1C3B370056F376 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C74C591F58ADB1C8C4A6D4A /* Pods-PDFCreator-PDFCreatorUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
