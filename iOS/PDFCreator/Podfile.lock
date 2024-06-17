@@ -1,44 +1,36 @@
 PODS:
-  - DynamsoftCameraEnhancer (4.2.10)
   - DynamsoftCaptureVisionRouter (2.2.30)
   - DynamsoftCore (3.2.30)
   - DynamsoftDocumentNormalizer (2.2.11)
-  - DynamsoftDocumentNormalizerBundle (2.2.1100):
-    - DynamsoftCameraEnhancer (= 4.2.10)
-    - DynamsoftCaptureVisionRouter (= 2.2.30)
-    - DynamsoftCore (= 3.2.30)
-    - DynamsoftDocumentNormalizer (= 2.2.11)
-    - DynamsoftImageProcessing (= 2.2.30)
-    - DynamsoftLicense (= 3.2.20)
-    - DynamsoftUtility (= 1.2.20)
   - DynamsoftImageProcessing (2.2.30)
   - DynamsoftLicense (3.2.20)
   - DynamsoftUtility (1.2.20)
 
 DEPENDENCIES:
-  - DynamsoftDocumentNormalizerBundle (= 2.2.1100)
+  - DynamsoftCaptureVisionRouter (= 2.2.30)
+  - DynamsoftCore (= 3.2.30)
+  - DynamsoftDocumentNormalizer (= 2.2.11)
+  - DynamsoftImageProcessing (= 2.2.30)
+  - DynamsoftLicense (= 3.2.20)
+  - DynamsoftUtility (= 1.2.20)
 
 SPEC REPOS:
   trunk:
-    - DynamsoftCameraEnhancer
     - DynamsoftCaptureVisionRouter
     - DynamsoftCore
     - DynamsoftDocumentNormalizer
-    - DynamsoftDocumentNormalizerBundle
     - DynamsoftImageProcessing
     - DynamsoftLicense
     - DynamsoftUtility
 
 SPEC CHECKSUMS:
-  DynamsoftCameraEnhancer: 4a9fb5faffe082932586df92118ebec381ef92ab
   DynamsoftCaptureVisionRouter: 8f481c88051ff0729fd584a76c6b79153d4295c1
   DynamsoftCore: 3df93615e493c7407c8cd1c9deef3961c80723a7
   DynamsoftDocumentNormalizer: 8232f301db5b9b8c9390f20b5d715de5bbb84c0a
-  DynamsoftDocumentNormalizerBundle: 5e78cb0fcfddc1893918f1d9a2ef6ace6a19e0f2
   DynamsoftImageProcessing: 766edbab1e23ef6584f265ab915ce3d8229ac935
   DynamsoftLicense: 011f6aaef262583ee6bddc8ec69cb2c9dd14d6a1
   DynamsoftUtility: 4738ca9899903d57a7053b633f080397421993c3
 
-PODFILE CHECKSUM: 79d8b79c74b14fc9ebf43d26ed5152731cedddeb
+PODFILE CHECKSUM: 817cb96e4c63501d85fd6fdfeea340592303845a
 
 COCOAPODS: 1.15.2

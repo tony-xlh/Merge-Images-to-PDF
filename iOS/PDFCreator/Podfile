@@ -15,5 +15,10 @@ target 'PDFCreator' do
   target 'PDFCreatorUITests' do
     # Pods for testing
   end
-  pod 'DynamsoftDocumentNormalizerBundle','2.2.1100'
+  pod 'DynamsoftCaptureVisionRouter','2.2.30'
+  pod 'DynamsoftCore','3.2.30'
+  pod 'DynamsoftDocumentNormalizer','2.2.11'
+  pod 'DynamsoftImageProcessing','2.2.30'
+  pod 'DynamsoftLicense','3.2.20'
+  pod 'DynamsoftUtility','1.2.20'
 end
