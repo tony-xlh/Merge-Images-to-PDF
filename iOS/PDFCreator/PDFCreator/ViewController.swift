@@ -7,25 +7,65 @@
 
 import UIKit
 import PhotosUI
+import DynamsoftCore
+import DynamsoftCaptureVisionRouter
+import DynamsoftDocumentNormalizer
+import DynamsoftUtility
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, PHPickerViewControllerDelegate {
-    
+    let cvr:CaptureVisionRouter = CaptureVisionRouter()
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        for item in results {
-            print(item.itemProvider)
-            if (item.itemProvider.canLoadObject(ofClass: UIImage.self)) {
-                item.itemProvider.loadObject(ofClass: UIImage.self) { image , error  in
-                    if let error{
-                        print(error)
-                    }
-                    if let selectedImage = image as? UIImage{
-                        print(selectedImage.size)
+        picker.dismiss(animated: true)
+        DispatchQueue.main.async {
+            var images:[UIImage] = []
+            var processed = 0
+            let size = results.count
+            for item in results {
+                if (item.itemProvider.canLoadObject(ofClass: UIImage.self)) {
+                    item.itemProvider.loadObject(ofClass: UIImage.self) { image , error  in
+                        if let error{
+                            print(error)
+                        }
+                        if let selectedImage = image as? UIImage{
+                            print(selectedImage.size)
+                            images.append(selectedImage)
+                            processed = processed + 1
+                            if processed == size {
+                                self.mergeImagesIntoPDF(images: images)
+                            }
+                        }
                     }
                 }
             }
         }
-        picker.dismiss(animated: true)
     }
+    
+    func mergeImagesIntoPDF(images:[UIImage]) {
+        print("mergeImagesIntoPDF")
+        let imageManager = ImageManager()
+        let url = FileManager.default.temporaryDirectory
+                                                        .appendingPathComponent(UUID().uuidString)
+                                                        .appendingPathExtension("pdf")
+        for image in images {
+            let capturedResult:CapturedResult = cvr.captureFromImage(image, templateName: PresetTemplate.detectAndNormalizeDocument.rawValue)
+            let items = capturedResult.items ?? []
+            for item in items {
+                if item.type == CapturedResultItemType.normalizedImage {
+                    let image:NormalizedImageResultItem = item as! NormalizedImageResultItem
+                    try? imageManager.saveToFile(image.imageData!, path: url.path, overWrite: true)
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            let objectsToShare = [url]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+
+            self.present(activityVC, animated: true, completion: nil)
+        }
+        
+    }
+    
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
