@@ -13,6 +13,9 @@ import DynamsoftDocumentNormalizer
 import DynamsoftUtility
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, PHPickerViewControllerDelegate {
+    @IBOutlet weak var selectImagesUIButton: UIButton!
+    @IBOutlet weak var colorModeUIPickerView: UIPickerView!
+    @IBOutlet weak var enableAutoCroppingUISwitch: UISwitch!
     let cvr:CaptureVisionRouter = CaptureVisionRouter()
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -42,12 +45,44 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func mergeImagesIntoPDF(images:[UIImage]) {
         print("mergeImagesIntoPDF")
+        var enableAutoCropping = false
+        var selectedColorModeIndex = 0
+        DispatchQueue.main.sync {
+            if enableAutoCroppingUISwitch.isOn {
+                enableAutoCropping = true
+            }
+            selectedColorModeIndex = colorModeUIPickerView.selectedRow(inComponent: 0)
+        }
+        let templateName:String;
+        if enableAutoCropping {
+            print("enable auto cropping")
+            templateName = PresetTemplate.detectAndNormalizeDocument.rawValue
+        }else{
+            print("disable auto cropping")
+            templateName = PresetTemplate.normalizeDocument.rawValue
+        }
+        var settings = try? cvr.getSimplifiedSettings(templateName)
+        print("selected row")
+        print(selectedColorModeIndex)
+        if selectedColorModeIndex == 0 {
+            settings?.documentSettings?.colourMode = ImageColourMode.binary
+        }else if selectedColorModeIndex == 1 {
+            settings?.documentSettings?.colourMode = ImageColourMode.grayscale
+        }else{
+            settings?.documentSettings?.colourMode = ImageColourMode.colour
+        }
+        if enableAutoCropping == false {
+            settings?.roi = Quadrilateral(pointArray: [CGPoint(x:0,y:0),CGPoint(x:100,y:0),CGPoint(x:100,y:100),CGPoint(x:0,y:100)])
+            settings?.roiMeasuredInPercentage = true
+        }
+        try? cvr.updateSettings(templateName, settings: settings!)
+        
         let imageManager = ImageManager()
         let url = FileManager.default.temporaryDirectory
                                                         .appendingPathComponent(UUID().uuidString)
                                                         .appendingPathExtension("pdf")
         for image in images {
-            let capturedResult:CapturedResult = cvr.captureFromImage(image, templateName: PresetTemplate.detectAndNormalizeDocument.rawValue)
+            let capturedResult:CapturedResult = cvr.captureFromImage(image, templateName: templateName)
             let items = capturedResult.items ?? []
             for item in items {
                 if item.type == CapturedResultItemType.normalizedImage {
@@ -87,10 +122,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 
     }
     
-    @IBOutlet weak var selectImagesUIButton: UIButton!
-    
-    @IBOutlet weak var colorModeUIPickerView: UIPickerView!
-    @IBOutlet weak var enableAutoCroppingUISwitch: UISwitch!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -60,7 +60,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="colorModeUIPickerView" destination="qyR-e3-Bc5" id="GOa-eq-j0x"/>
+                        <outlet property="colorModeUIPickerView" destination="qyR-e3-Bc5" id="Mqf-id-JFf"/>
                         <outlet property="enableAutoCroppingUISwitch" destination="Npr-kz-RoL" id="drJ-TU-51W"/>
                         <outlet property="selectImagesUIButton" destination="pUZ-E8-VYU" id="C3j-5P-urR"/>
                     </connections>
