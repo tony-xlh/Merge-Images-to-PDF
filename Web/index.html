@@ -6,15 +6,20 @@
   <script src="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.css">
   <style>
+    #container {
+      height: 480px;
+    }
   </style>
 </head>
 <body>
   <h2>Merge Images into PDF</h2>
-  <input type="file" name="file" id="file" multiple="multiple">
+  <input type="file" name="file" id="file" multiple="multiple" onchange="filesSelected()">
   <button onclick="merge()">Merge into PDF</button>
+  <button onclick="openEditor()">Open Editor</button>
   <div id="status"></div>
-  <div class="container"></div>
+  <div id="container"></div>
   <script>
+    let editViewer;
     init();
     async function init(){
       document.getElementById("status").innerText = "Loading...";
@@ -22,24 +27,51 @@
       Dynamsoft.DDV.Core.engineResourcePath = "https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/engine";// Lead to a folder containing the distributed WASM files
       await Dynamsoft.DDV.Core.loadWasm();
       await Dynamsoft.DDV.Core.init(); 
+      Dynamsoft.DDV.setProcessingHandler("imageFilter", new Dynamsoft.DDV.ImageFilter());
       document.getElementById("status").innerText = "";
     }
 
-    async function merge(){
-      let fileInput = document.getElementById("file");
-      let files = fileInput.files;
-      if (files.length == 0){
-        return;
+    async function openEditor(){
+      if (!editViewer) {
+        editViewer = new Dynamsoft.DDV.EditViewer({
+          container: "container",
+        });
+        const doc = await loadImagesToDocument();
+        editViewer.openDocument(doc.uid);
       }
-      const doc = Dynamsoft.DDV.documentManager.createDocument();
-      for (let index = 0; index < files.length; index++) {
-        const file = files[index];
-        const source = await readFileAsBlob(file);
-        try {
-          await doc.loadSource(source);  
-        } catch (error) {
-          console.log(error);
+    }
+
+    function loadImagesToDocument(){
+      return new Promise(async (resolve, reject) => {
+        const doc = Dynamsoft.DDV.documentManager.createDocument();
+        let fileInput = document.getElementById("file");
+        let files = fileInput.files;
+        for (let index = 0; index < files.length; index++) {
+          const file = files[index];
+          const source = await readFileAsBlob(file);
+          try {
+            await doc.loadSource(source);  
+          } catch (error) {
+            console.log(error);
+          }
         }
+        resolve(doc);
+      })
+    }
+
+    async function filesSelected(){
+      if (editViewer) {
+        const doc = await loadImagesToDocument();
+        editViewer.openDocument(doc.uid);
+      }
+    }
+
+    async function merge(){
+      let doc;
+      if (editViewer && editViewer.currentDocument) {
+        doc = editViewer.currentDocument;
+      }else{
+        doc = await loadImagesToDocument();
       }
       const blob = await doc.saveToPdf();
       downloadBlob(blob);
