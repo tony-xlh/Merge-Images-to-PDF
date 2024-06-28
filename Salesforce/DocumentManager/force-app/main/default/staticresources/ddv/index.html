@@ -38,6 +38,28 @@
             container: "container",
         });
         Dynamsoft.DDV.Experiments.set("FileParser.Options", { type: "application/pdf", options: {convertMode: 'cm/renderall'}});
+        window.addEventListener(
+          "message",
+          async (event) => {
+            console.log("received message in iframe");
+            console.log(event);
+            let pdf = await editViewer.currentDocument.saveToPdf();
+            let dataURL = await blobToDataURL(pdf);
+            window.parent.postMessage(dataURL);
+          },
+          false,
+        );
     })();
+
+    function blobToDataURL(blob) {
+      return new Promise((resolve,reject)=>{
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.addEventListener("error",reject);
+        reader.onload = function (e) {
+          resolve(e.target.result);
+        }
+      })
+    }
 </script>
 </html>

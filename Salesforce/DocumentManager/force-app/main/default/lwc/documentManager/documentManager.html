@@ -1,6 +1,13 @@
 <template>
   <lightning-card title="Dynamsoft Document Viewer" icon-name="custom:custom14">
     <div class="slds-m-around_medium">
+      <lightning-button label="Merge into PDF" onclick={merge}></lightning-button>
+      <div>
+        <label>
+          Received dataURL:&nbsp;
+          <a target="_blank" href={dataURL}>{dataURLLabel}</a>
+        </label>
+      </div>
     </div>
     <div class="ddvViewer" id='ddvViewer' style="height:500px;width:400px;"></div>
   </lightning-card>
