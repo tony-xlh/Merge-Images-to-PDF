@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DDV - HelloWorld</title>
+    <script src="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.css">
+</head>
+<style>
+    html,body {
+        width: 100%;
+        height: 100%;
+        margin:0;
+        padding:0;
+        overscroll-behavior-y: none;
+        overflow: hidden;
+    }
+
+    #container {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+    <div id="container"></div>
+</body>
+<script type="module">
+    (async () => {
+        // Public trial license which is valid for 24 hours
+        // You can request a 30-day trial key from https://www.dynamsoft.com/customer/license/trialLicense/?product=ddv
+        Dynamsoft.DDV.Core.license = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==";
+        Dynamsoft.DDV.Core.engineResourcePath = "https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/engine";// Lead to a folder containing the distributed WASM files
+        await Dynamsoft.DDV.Core.init();
+        Dynamsoft.DDV.setProcessingHandler("imageFilter", new Dynamsoft.DDV.ImageFilter());
+        const editViewer = new Dynamsoft.DDV.EditViewer({
+            container: "container",
+        });
+        Dynamsoft.DDV.Experiments.set("FileParser.Options", { type: "application/pdf", options: {convertMode: 'cm/renderall'}});
+    })();
+</script>
+</html>
